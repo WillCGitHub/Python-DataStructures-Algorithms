@@ -8,7 +8,6 @@ quickSort3Way method implements the 3 partitions quick sort, specifically design
 """
 
 def swap(arr,e1,e2):
-	#print ("swap {} at index {} and {} at index {} ".format(arr[e1],e1,arr[e2],e2))
 	temp = arr[e1]
 	arr[e1] = arr[e2]
 	arr[e2] = temp
@@ -122,11 +121,6 @@ def quickSort3Way(arr):
 				partition_eq.append(ele)
 			for ele in arr[i:len(arr)]:
 				partition_gt.append(ele)
-
-		print (arr)
-		print ("length of sl:{}".format(len(partition_sl)))
-		print ("length of gt:{}".format(len(partition_gt)))
-
 		
 		if len(partition_sl) > 1:
 			partition_sl = quickSort3Way(partition_sl)
@@ -134,10 +128,7 @@ def quickSort3Way(arr):
 			partition_gt = quickSort3Way(partition_gt)
 		
 
-		#print ("gt:{}".format(partition_gt))
 		newArr = partition_sl+partition_eq+partition_gt
-		#print (partition_sl)
-		#print ("sl: {}, eq:{}, gt:{} ".format(len(partition_sl),len(partition_eq),len(partition_gt)))
 		return newArr
 
 
@@ -148,7 +139,6 @@ def quickSort3Way(arr):
 numbers = [13,9,36,9,8,6,4,2,9,5,10,9,9,20,35,3,12,13,5,6,9,9,9]
 #numbers = [3,99,5,7,9,3,0,3,6,90,9,1,3,9,3,8,6,3]
 #numbers = [2,3,5,9,10]
-#numbers = [6,6,5]
 print (len(numbers))
 sortedArr = quickSort3Way(numbers)
 print (len(sortedArr))
