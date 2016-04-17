@@ -50,9 +50,11 @@ def quickSort3Way(arr):
 			return arr
 		else:
 			return arr
+
+
 	elif len(arr)>2:
 		pivot = arr[0]
-		print ("pivot is {}".format(pivot))
+		#print ("pivot is {}".format(pivot))
 		i = 1
 		j = len(arr)-1
 		p = 1 
@@ -78,9 +80,13 @@ def quickSort3Way(arr):
 			if j > i:
 				arr = swap(arr,i,j)
 			else:
-				if j == i:
+				if (j == i) and (i != len(arr)-1):
 					j-=1
-				break
+					break
+				elif (j == i) and (i == len(arr)-1):
+					break
+				else:
+					break
 
 			if arr[i] == pivot:
 				arr = swap(arr,i,p)
@@ -101,7 +107,6 @@ def quickSort3Way(arr):
 			arr = swap(arr,p,j)
 			j-=1
 
-
 		while (q<len(arr)-1) and (q >=i):
 			q+=1
 			arr = swap(arr,q,i)
@@ -121,7 +126,7 @@ def quickSort3Way(arr):
 				partition_eq.append(ele)
 			for ele in arr[i:len(arr)]:
 				partition_gt.append(ele)
-		
+
 		if len(partition_sl) > 1:
 			partition_sl = quickSort3Way(partition_sl)
 		if len(partition_gt) > 1:
@@ -136,9 +141,10 @@ def quickSort3Way(arr):
 
 
 
-numbers = [13,9,36,9,8,6,4,2,9,5,10,9,9,20,35,3,12,13,5,6,9,9,9]
-#numbers = [3,99,5,7,9,3,0,3,6,90,9,1,3,9,3,8,6,3]
-#numbers = [2,3,5,9,10]
+#numbers = [13,9,36,9,8,6,4,2,9,5,10,9,9,20,35,3,12,13,5,6,9,9,9]
+#numbers = [6,9,16,19,24,35,44,14,17,23,31,45,22,49,55,29,38,50,54,59]
+numbers = [1,3,4,6,8,2,5,7,9,24,25,28,30,23,27,32,59,64,65,92,95,103,60,63,93,97,99,98,31,33]
+#numbers = [54, 49, 45, 50]
 print (len(numbers))
 sortedArr = quickSort3Way(numbers)
 print (len(sortedArr))
