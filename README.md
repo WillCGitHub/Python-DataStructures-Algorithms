@@ -2,7 +2,7 @@
 Basic Data Structures in Python
 
 ---
-##Sorting Algorith:
+##Sorting Algorithm:
 
 * Bubble sort
 
