@@ -5,23 +5,27 @@ quickSort method implements the 2 partitions common quick sort.
 quickSort(list)
 
 
-
-quickSort3Way method implements the 3 partitions quick sort, specifically designed for data that has many duplicates. 
-(Bentley-McIlroy 3-way partitioning)
+quickSort3Way method implements the 3 partitions quick sort, 
+specifically designed for data that has many duplicates. 
 
 quickSort3Way()
 """
 
 class QuickSort():
-	def __init__(self):
-		pass
+	def __init__(self,arr):
+		self.arr = arr
 	def swap(self,arr,e1,e2):
 		temp = arr[e1]
 		arr[e1] = arr[e2]
 		arr[e2] = temp
 		return arr
 
-	def quickSort(self,arr):
+	def quickSort(self):
+		return self.qs(self.arr)
+
+	def qs(self,arr):
+		if len(arr) == 0 or len(arr) == 1:
+			return arr
 		pivot = arr[len(arr)-1]
 		wall = 0
 		partition1=[]
@@ -38,126 +42,95 @@ class QuickSort():
 			partition2.append(ele)
 
 		if len(partition1) > 1:
-			partition1 = self.quickSort(partition1)
+			partition1 = self.qs(partition1)
 		if len(partition2) > 1:
-			partition2 = self.quickSort(partition2)
+			partition2 = self.qs(partition2)
 		newArr = partition1+[pivot]+partition2
-
 
 		return newArr
 
 
-	def quickSort3Way(self,arr):
-		if arr is None:
+	def quickSort3Way(self):
+		return self.qs3(self.arr)
+
+	def qs3(self,arr):
+		if len(arr)== 0 or len(arr) == 1:
 			return arr 
-		elif len(arr) ==1:
-			return arr
-		elif len(arr) == 2:
+		if len(arr) == 2:
 			if arr[0] > arr[1]:
 				self.swap(arr,0,1)
 				return arr
 			else:
 				return arr
 
-
-		elif len(arr)>2:
-			pivot = arr[0]
-			#print ("pivot is {}".format(pivot))
-			i = 1
-			j = len(arr)-1
-			p = 1 
-			q = len(arr)-1
-			partition_sl = []
-			partition_eq = []
-			partition_gt = []
-			#phase 1 scan from left to right 
-			#and right to left
-			#5 parts 
-			#equal, smaller than, unkown, greater than, equal
-			while(1):
-				while (arr[i] < pivot):
-					if i >= len(arr)-1:
-						break
-					i+=1
-
-				while (arr[j]>pivot):
-					if j <= 1:
-						break
-					j-=1
-				
-				if j > i:
-					arr = self.swap(arr,i,j)
-				else:
-					if (j == i) and (i != len(arr)-1):
-						j-=1
-						break
-					elif (j == i) and (i == len(arr)-1):
-						break
-					else:
-						break
-
-				if arr[i] == pivot:
-					arr = self.swap(arr,i,p)
-					p+=1
-					if i <len(arr)-1:
-						i+=1
-
-
-				if arr[j] == pivot:
-					arr = self.swap(arr,j,q)
-					q-=1		
-
-			#phase 2 swap equal partition to the middle
-			#smaller than, equal, greater than
-
-			while (p > 0) and (p <= j):
-				p-=1
-				arr = self.swap(arr,p,j)
-				j-=1
-
-			while (q<len(arr)-1) and (q >=i):
-				q+=1
-				arr = self.swap(arr,q,i)
+		lo = 0
+		hi = len(arr)-1
+		if arr[hi] <= arr[lo]:
+			self.swap(arr,lo,hi)
+		i = 1
+		lt = 1
+		gt = len(arr) -2
+		while (1):
+			if arr[i] < arr[lo]:
+				self.swap(arr,i,lt)
+				lt+=1
 				i+=1
-
-			if j == i :
-				for ele in arr[:j]:
-					partition_sl.append(ele)
-				for ele in arr[j+1:i]:
-					partition_eq.append(ele)
-				for ele in arr[i:len(arr)]:
-					partition_gt.append(ele)
+			elif arr[i] > arr[hi]:
+				self.swap(arr,i,gt)
+				gt-=1
 			else:
-				for ele in arr[:j+1]:
-					partition_sl.append(ele)
-				for ele in arr[j+1:i]:
-					partition_eq.append(ele)
-				for ele in arr[i:len(arr)]:
-					partition_gt.append(ele)
+				i+=1
+			if i > gt:
+				break
 
-			if len(partition_sl) > 1:
-				partition_sl = self.quickSort3Way(partition_sl)
-			if len(partition_gt) > 1:
-				partition_gt = self.quickSort3Way(partition_gt)
-			
+		lt-=1
+		gt+=1
+		self.swap(arr,lo,lt)
+		self.swap(arr,hi,gt)
 
-			newArr = partition_sl+partition_eq+partition_gt
-			return newArr
+		partition_sl = arr[:lt]
+		partition_md = arr[lt+1:gt]
+		partition_gt = arr[gt+1:hi+1]
+
+		if len(partition_sl) > 1:
+			partition_sl = self.qs3(partition_sl)
+		if len(partition_md) > 1:
+			partition_md = self.qs3(partition_md)
+		if len(partition_gt) > 1:
+			partition_gt = self.qs3(partition_gt)
+
+		newArr = partition_sl+[arr[lt]]+partition_md+[arr[gt]]+partition_gt
+		return newArr
 
 
 
 
 if __name__ == '__main__':
+	from random import randint
+	c = 0 #correct 
+	w = 0 #wrong
+	c3 = 0
+	w3 = 0
+	
+	for outer_idx in range(1000):
+		numbers = []
+		for inner_idx in range(0,randint(0,100)):
+			numbers.append(randint(0,1000))
+		a = QuickSort(numbers)
+		qsort3w = a.quickSort3Way()
+		qsort = a.quickSort()
+		answer = sorted(numbers)
+		if qsort3w == answer:
+			c3+=1
+		else:
+			w3+=1
+		if qsort == answer:
+			c+=1
+		else:
+			w+=1
+	print('1000 test cases')
+	print("Quick sort:\n{} passed , {} failed".format(c,w))
+	print("Quick sort 3 ways:\n{} passed, {} failed".format(c3,w3))
 
-	#numbers = [13,9,36,9,8,6,4,2,9,5,10,9,9,20,35,3,12,13,5,6,9,9,9]
-	#numbers = [6,9,16,19,24,35,44,14,17,23,31,45,22,49,55,29,38,50,54,59]
-	numbers = [1,3,4,6,8,2,5,7,9,24,25,28,30,23,27,32,59,64,65,92,95,103,60,63,93,97,99,98,31,33]
-	#numbers = [54, 49, 45, 50]
-	print (len(numbers))
-	a = QuickSort()
-	sortedArr = a.quickSort3Way(numbers)
-	normalsort = a.quickSort(numbers)
-	print (sortedArr)
-	print (normalsort)
 
 
