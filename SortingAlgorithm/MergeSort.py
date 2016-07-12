@@ -4,17 +4,16 @@ Worst case complexity is O(nlogn)
 
 To use merge sort, one needs to instantiate a class
 
-a = [1,3,2,4,6,3,5]
-b = MergeSort()
-b.MergeSort(a)
+
 """
-import BubbleSort
 
 class MergeSort():
-	def __init__(self):
-		pass
+	def __init__(self, arr):
+		self.arr = arr
 
-	def  MergeSort(self,arr):
+	def MergeSort(self):
+		return self.msort(self.arr)
+	def msort(self,arr):
 		newList = []
 		p = 0
 		r = len(arr)-1
@@ -23,9 +22,9 @@ class MergeSort():
 		partition1 = arr[0:q+1]
 		partition2 = arr[q+1:len(arr)]
 		if (len(partition1)>1):
-			partition1 = self.MergeSort(partition1)
+			partition1 = self.msort(partition1)
 		if (len(partition2)>1):
-			partition2 = self.MergeSort(partition2)
+			partition2 = self.msort(partition2)
 		
 		newList = self.merge(partition1,partition2)
 		return newList
@@ -56,11 +55,21 @@ class MergeSort():
 
 
 if __name__ == '__main__':
-	a = [1,10,5,8,66,30,59,102,33,60,99,1002,88,66,33,22,11,88,669,30]
-	merge = MergeSort()
-	bubble = BubbleSort.BubbleSort()
-	b = merge.MergeSort(a)
-	c = bubble.BubbleSort(a)
-	if b == c:
-		print (True)
+	from random import randint
+	numbers = []
+	c = 0 # correct
+	w = 0
+	for idx in range(100):
+		for idx in range(randint(0,100)):
+			numbers.append(randint(0,1000))
+		merge = MergeSort(numbers)
+		msort = merge.MergeSort()
+		answer = sorted(numbers)
+		if msort == answer:
+			c+=1
+		else:
+			w+=1
+	print("100 test cases")
+	print("{} passed".format(c))
+	print("{} failed".format(w))
 
