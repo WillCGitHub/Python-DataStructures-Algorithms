@@ -1,11 +1,22 @@
-# PythonDataStructures
-Basic Data Structures in Python
+# Python Data Structures & Algorithms
+
 
 ---
-##Sorting Algorithm:
+##Data Structures:
+- [ ] Linked Lists
+- [ ] Stacks
+- [ ] Queues
+- [ ] Trees
+- [ ] Graphs
 
-* Bubble sort
-
-* Merge sort
-
-* Quick sort (2 & 3 partitions)
+## Algorithms:
+- [x] Bubble Sort
+- [x] Merge Sort
+- [x] Quick Sort (single pivot & dual pivot)
+- [ ] Heap Sort
+- [ ] Topological Sort
+- [ ] Dijkstra's Algorithm
+- [ ] Prim's Algorithm
+- [ ] Bread First Search
+- [ ] Depth First Search 
+- [ ] Binary Search 
