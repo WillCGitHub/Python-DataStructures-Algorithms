@@ -1,7 +1,7 @@
 # Python Data Structures & Algorithms
+A practice of data structures and algorithms in python
 
 
----
 ##Data Structures:
 - [ ] Linked Lists
 - [ ] Stacks
@@ -20,3 +20,6 @@
 - [ ] Bread First Search
 - [ ] Depth First Search 
 - [ ] Binary Search 
+
+
+Welcome to contribute to the repository 
