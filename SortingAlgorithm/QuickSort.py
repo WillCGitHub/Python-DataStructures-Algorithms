@@ -21,9 +21,9 @@ class QuickSort():
 		return arr
 
 	def quickSort(self):
-		return self.qs(self.arr)
+		return self._qs(self.arr)
 
-	def qs(self,arr):
+	def _qs(self,arr):
 		if len(arr) == 0 or len(arr) == 1:
 			return arr
 		pivot = arr[len(arr)-1]
@@ -42,18 +42,18 @@ class QuickSort():
 			partition2.append(ele)
 
 		if len(partition1) > 1:
-			partition1 = self.qs(partition1)
+			partition1 = self._qs(partition1)
 		if len(partition2) > 1:
-			partition2 = self.qs(partition2)
+			partition2 = self._qs(partition2)
 		newArr = partition1+[pivot]+partition2
 
 		return newArr
 
 
 	def quickSort3Way(self):
-		return self.qs3(self.arr)
+		return self._qs3(self.arr)
 
-	def qs3(self,arr):
+	def _qs3(self,arr):
 		if len(arr)== 0 or len(arr) == 1:
 			return arr 
 		if len(arr) == 2:
@@ -93,11 +93,11 @@ class QuickSort():
 		partition_gt = arr[gt+1:hi+1]
 
 		if len(partition_sl) > 1:
-			partition_sl = self.qs3(partition_sl)
+			partition_sl = self._qs3(partition_sl)
 		if len(partition_md) > 1:
-			partition_md = self.qs3(partition_md)
+			partition_md = self._qs3(partition_md)
 		if len(partition_gt) > 1:
-			partition_gt = self.qs3(partition_gt)
+			partition_gt = self._qs3(partition_gt)
 
 		newArr = partition_sl+[arr[lt]]+partition_md+[arr[gt]]+partition_gt
 		return newArr

@@ -12,8 +12,8 @@ class MergeSort():
 		self.arr = arr
 
 	def MergeSort(self):
-		return self.msort(self.arr)
-	def msort(self,arr):
+		return self._msort(self.arr)
+	def _msort(self,arr):
 		newList = []
 		p = 0
 		r = len(arr)-1
@@ -22,14 +22,14 @@ class MergeSort():
 		partition1 = arr[0:q+1]
 		partition2 = arr[q+1:len(arr)]
 		if (len(partition1)>1):
-			partition1 = self.msort(partition1)
+			partition1 = self._msort(partition1)
 		if (len(partition2)>1):
-			partition2 = self.msort(partition2)
+			partition2 = self._msort(partition2)
 		
-		newList = self.merge(partition1,partition2)
+		newList = self._merge(partition1,partition2)
 		return newList
 
-	def merge(self,arr1,arr2):
+	def _merge(self,arr1,arr2):
 		mergedList = []
 		if (len(arr1)!=0) or (len(arr2) !=0):
 
