@@ -20,6 +20,7 @@ A practice of data structures and algorithms in python
 - [ ] Bread First Search
 - [ ] Depth First Search 
 - [ ] Binary Search 
+- [x] Tree Traversal: pre-order, in-order, post-order, recursive, iterative 
 
 
 Welcome to contribute to the repository 
